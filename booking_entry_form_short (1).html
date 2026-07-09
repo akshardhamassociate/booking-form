@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Entry Form (Short) - Akshardham Associates</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f5f7fa;
+    color: #1a1a1a;
+    line-height: 1.5;
+    padding-bottom: 100px;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    color: white;
+    padding: 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.header p {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.booking-id {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    display: inline-block;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* Container */
+.container {
+    max-width: 720px;
+    margin: 16px auto;
+    padding: 0 12px;
+}
+
+/* Section Card */
+.section {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.section-header {
+    background: #f8fafc;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1e40af;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.section-subtitle {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.section-body {
+    padding: 16px;
+}
+
+/* Form Fields */
+.field {
+    margin-bottom: 14px;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.field-row .field { margin-bottom: 0; }
+
+@media (max-width: 480px) {
+    .field-row { grid-template-columns: 1fr; gap: 0; }
+    .field-row .field { margin-bottom: 14px; }
+    .field-row .field:last-child { margin-bottom: 0; }
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.required::after {
+    content: ' *';
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.hint {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #1e40af;
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+input[readonly], input.calculated {
+    background: #f1f5f9;
+    color: #475569;
+    cursor: not-allowed;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    padding-right: 36px;
+}
+
+/* Highlight box for important values */
+.highlight-box {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+.highlight-box.success {
+    background: #d1fae5;
+    border-left-color: #10b981;
+}
+
+.highlight-box.danger {
+    background: #fee2e2;
+    border-left-color: #dc2626;
+}
+
+.highlight-label {
+    font-size: 11px;
+    color: #78350f;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.highlight-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #92400e;
+    margin-top: 2px;
+}
+
+.highlight-box.success .highlight-label { color: #065f46; }
+.highlight-box.success .highlight-value { color: #047857; }
+.highlight-box.danger .highlight-label { color: #991b1b; }
+.highlight-box.danger .highlight-value { color: #b91c1c; }
+
+/* Installment Table */
+.installments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.installments-table th {
+    background: #f1f5f9;
+    padding: 8px 6px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: #475569;
+    text-transform: uppercase;
+}
+
+.installments-table td {
+    padding: 6px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.installments-table input {
+    padding: 6px 8px;
+    font-size: 13px;
+}
+
+.installments-table .delete-btn {
+    background: #fee2e2;
+    color: #dc2626;
+    border: none;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-installment {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px dashed #1e40af;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+}
+
+.add-installment:hover { background: #bfdbfe; }
+
+.total-row {
+    background: #f8fafc;
+    font-weight: 600;
+}
+
+.total-row td {
+    border-top: 2px solid #1e40af;
+    padding: 10px 6px;
+}
+
+/* File Upload */
+.file-upload {
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f8fafc;
+}
+
+.file-upload:hover {
+    border-color: #1e40af;
+    background: #eff6ff;
+}
+
+.file-upload input[type="file"] { display: none; }
+
+.file-upload-text {
+    font-size: 13px;
+    color: #475569;
+}
+
+.file-upload-text span {
+    color: #1e40af;
+    font-weight: 600;
+}
+
+.uploaded-file {
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: #d1fae5;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #065f46;
+    display: none;
+}
+
+/* Confirmation checkbox (Aadhaar/PAN xerox) */
+.confirm-box {
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #f8fafc;
+}
+
+.confirm-box input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #1e40af;
+    flex-shrink: 0;
+}
+
+.confirm-box label {
+    margin-bottom: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+}
+
+/* Validation messages */
+.validation-msg {
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+}
+
+.validation-msg.error {
+    color: #dc2626;
+    display: block;
+}
+
+.validation-msg.warning {
+    color: #d97706;
+    display: block;
+}
+
+/* Action buttons */
+.action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 12px 16px;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 10px;
+    z-index: 90;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: #1e40af;
+    color: white;
+}
+
+.btn-primary:hover { background: #1e3a8a; }
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.btn-secondary:hover { background: #cbd5e1; }
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Summary Bar */
+.summary-bar {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #7dd3fc;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    text-align: center;
+}
+
+.summary-item .label {
+    font-size: 10px;
+    color: #0369a1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.summary-item .value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0c4a6e;
+    margin-top: 2px;
+}
+
+/* Success Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active { display: flex; }
+
+.modal-content {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 24px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-icon {
+    width: 64px;
+    height: 64px;
+    background: #d1fae5;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+}
+
+.modal h2 {
+    font-size: 20px;
+    color: #065f46;
+    margin-bottom: 8px;
+}
+
+.modal p {
+    color: #475569;
+    margin-bottom: 24px;
+    font-size: 14px;
+}
+
+.warning-banner {
+    background: #fef3c7;
+    border: 1px solid #fbbf24;
+    color: #92400e;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.warning-banner strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-content">
+        <h1>🏠 Booking Entry Form (Short)</h1>
+        <p>Akshardham Associates · Quick Plot Booking Entry</p>
+        <span class="booking-id" id="bookingIdDisplay">Booking ID: BK-2026-XXXX (auto-generate)</span>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Quick Summary Bar -->
+    <div class="summary-bar">
+        <div class="summary-item">
+            <div class="label">Total Deal</div>
+            <div class="value" id="summaryTotal">₹ 0</div>
+        </div>
+        <div class="summary-item">
+            <div class="label">Advance</div>
+            <div class="value" id="summaryAdvance">₹ 0</div>
+        </div>
+        <div class="summary-item">
+            <div class="label">Balance</div>
+            <div class="value" id="summaryBalance">₹ 0</div>
+        </div>
+    </div>
+
+    <form id="bookingForm" onsubmit="return submitForm(event)">
+
+        <!-- SECTION A: Customer Details -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">A</div>
+                <div>
+                    <div class="section-title">Customer Details</div>
+                    <div class="section-subtitle">Essential buyer information</div>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="field">
+                    <label class="required">Customer's Full Name</label>
+                    <input type="text" id="customerName" placeholder="e.g., Mangilal Ji Patidar" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Mobile Number</label>
+                        <input type="tel" id="phonePrimary" placeholder="10 digit number" maxlength="10" pattern="[0-9]{10}" required>
+                        <div class="validation-msg" id="phoneError"></div>
+                    </div>
+                    <div class="field">
+                        <label>Alternate Number</label>
+                        <input type="tel" id="phoneAlternate" placeholder="10 digit number" maxlength="10" pattern="[0-9]{10}">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="required">Full Address</label>
+                    <textarea id="address" placeholder="Village, Tehsil, District" required></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label>Native Place</label>
+                        <input type="text" id="nativePlace" placeholder="e.g., Khanpur, Jhalawar">
+                    </div>
+                    <div class="field">
+                        <label class="required">Occupation</label>
+                        <input type="text" id="occupation" placeholder="e.g., Farmer, Shopkeeper, Job" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Family Decision Maker</label>
+                    <select id="decisionMaker">
+                        <option value="">Choose...</option>
+                        <option value="self">Self</option>
+                        <option value="spouse">Spouse</option>
+                        <option value="father">Father</option>
+                        <option value="brother">Brother</option>
+                        <option value="son">Son</option>
+                        <option value="joint">Joint Family Decision</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Lead Source</label>
+                        <select id="leadSource" required>
+                            <option value="">Choose source...</option>
+                            <option value="retailer">Retailer Reference</option>
+                            <option value="agent">Agent (Old)</option>
+                            <option value="youth_agent">Youth Agent</option>
+                            <option value="walk_in">Walk-in</option>
+                            <option value="facebook">Facebook Ad</option>
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="referral">Customer Referral</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Source Reference Name</label>
+                        <input type="text" id="sourceReference" placeholder="Retailer/Agent's name">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION B: Plot Details -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">B</div>
+                <div>
+                    <div class="section-title">Plot Details</div>
+                    <div class="section-subtitle">Which plot is being booked</div>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Colony</label>
+                        <select id="colony" required>
+                            <option value="">Choose colony...</option>
+                            <option value="gopal_vihar">Gopal Vihar, Khanpur</option>
+                            <option value="vinayak_residency">Vinayak Residency, Jhalawar</option>
+                            <option value="akshardham">Akshardham Colony</option>
+                            <option value="anjani_nagar">Anjani Nagar</option>
+                            <option value="dwarika_nagar">Dwarika Nagar</option>
+                            <option value="new_dwarika">New Dwarika Nagar</option>
+                            <option value="new_akshardham">New Akshardham</option>
+                            <option value="ambika">Ambika Colony</option>
+                            <option value="other">Other (Specify in Remarks)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label class="required">Plot Number</label>
+                        <input type="text" id="plotNumber" placeholder="e.g., 6, A-10, Corner-3" required>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Plot Dimensions</label>
+                        <input type="text" id="plotDimensions" placeholder="e.g., 25 x 40" required oninput="calculateSizeFromDimensions()">
+                    </div>
+                    <div class="field">
+                        <label class="required">Size (Square Feet)</label>
+                        <input type="number" id="plotSize" placeholder="e.g., 1800" min="100" required oninput="calculateAmounts()">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Plot Category</label>
+                        <select id="plotCategory" required>
+                            <option value="">Choose...</option>
+                            <option value="A">Category A (Corner / Front / 40ft Road)</option>
+                            <option value="B">Category B (Standard)</option>
+                            <option value="C">Category C (Inner / Smaller)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Corner Status</label>
+                        <select id="cornerStatus">
+                            <option value="no">Non-Corner</option>
+                            <option value="yes">Corner Plot</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Base Rate (per sq.ft)</label>
+                        <input type="number" id="baseRate" placeholder="Enter base rate" required oninput="calculateAmounts()">
+                        <div class="hint">Colony's current standard rate</div>
+                    </div>
+                    <div class="field">
+                        <label>Base Total Amount</label>
+                        <input type="text" id="baseTotal" class="calculated" readonly placeholder="Auto-calculated">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION C: Deal Terms -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">C</div>
+                <div>
+                    <div class="section-title">Deal Terms</div>
+                    <div class="section-subtitle">Final price and advance details</div>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Booking Date</label>
+                        <input type="date" id="bookingDate" required>
+                    </div>
+                    <div class="field">
+                        <label class="required">Final Rate (per sq.ft)</label>
+                        <input type="number" id="finalRate" placeholder="e.g., 950" required oninput="calculateAmounts()">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="required">Total Deal Amount (₹)</label>
+                    <input type="number" id="totalDealAmount" placeholder="Auto-calculated or override" required oninput="calculateAmounts()">
+                    <div class="hint">Size × Final Rate (you can manually edit this)</div>
+                </div>
+
+                <div class="highlight-box" id="discountBox" style="display:none;">
+                    <div class="highlight-label">Discount Given</div>
+                    <div class="highlight-value" id="discountAmount">₹ 0</div>
+                </div>
+
+                <div class="field" id="discountReasonField" style="display:none;">
+                    <label class="required">Discount Reason</label>
+                    <textarea id="discountReason" placeholder="e.g., Bulk family deal, repeat customer, etc."></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Advance Today (₹)</label>
+                        <input type="number" id="advanceAmount" placeholder="e.g., 200000" required oninput="calculateAmounts(); checkCashLimit();">
+                    </div>
+                    <div class="field">
+                        <label class="required">Payment Mode</label>
+                        <select id="paymentMode" required onchange="checkCashLimit()">
+                            <option value="">Choose...</option>
+                            <option value="cash">Cash</option>
+                            <option value="cheque">Cheque</option>
+                            <option value="upi">UPI</option>
+                            <option value="bank_transfer">Bank Transfer / NEFT / RTGS</option>
+                            <option value="mixed">Mixed (Cash + Other)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field" id="cashAmountField" style="display:none;">
+                    <label>Cash Component (₹)</label>
+                    <input type="number" id="cashComponent" placeholder="Total cash amount" oninput="checkCashLimit()">
+                    <div class="validation-msg" id="cashWarning"></div>
+                </div>
+
+                <div class="field" id="chequeDetailsField" style="display:none;">
+                    <label>Cheque / Reference Number</label>
+                    <input type="text" id="chequeNumber" placeholder="Cheque number or transaction ID">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION D: Payment Schedule -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">D</div>
+                <div>
+                    <div class="section-title">Payment Schedule</div>
+                    <div class="section-subtitle">Installments - every date must be FIXED</div>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="warning-banner">
+                    <span>⚠️</span>
+                    <div><strong>Mandatory Rule:</strong> Vague dates like "sometime in May" are not allowed. Please enter a specific calendar date.</div>
+                </div>
+
+                <table class="installments-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Due Date</th>
+                            <th>Amount (₹)</th>
+                            <th>Trigger / Note</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="installmentRows">
+                        <!-- Auto-populated row 1 = Advance -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="total-row">
+                            <td colspan="2">Total Schedule</td>
+                            <td id="installmentsTotal">₹ 0</td>
+                            <td colspan="2" id="installmentsMatch"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <button type="button" class="add-installment" onclick="addInstallment()">+ Add Installment</button>
+            </div>
+        </div>
+
+        <!-- SECTION E: Documents -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">E</div>
+                <div>
+                    <div class="section-title">Documents</div>
+                    <div class="section-subtitle">Photo + Aadhaar/PAN xerox confirmation</div>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="field">
+                    <label class="required">Customer Photo</label>
+                    <label class="file-upload">
+                        <input type="file" accept="image/*" onchange="handleFileUpload(this, 'photoFile')">
+                        <div class="file-upload-text">📷 Click to upload <span>Photo</span></div>
+                    </label>
+                    <div class="uploaded-file" id="photoFile">✓ Uploaded</div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label class="required">Aadhaar Number</label>
+                        <input type="text" id="aadhaarNumber" placeholder="12 digit number" maxlength="12" pattern="[0-9]{12}" required>
+                    </div>
+                    <div class="field">
+                        <label class="required">PAN Number</label>
+                        <input type="text" id="panNumber" placeholder="e.g., ABCDE1234F" maxlength="10" style="text-transform:uppercase;" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="confirm-box">
+                        <input type="checkbox" id="xeroxConfirm" required>
+                        <label for="xeroxConfirm" class="required">Aadhaar and PAN photocopy has been collected from the customer</label>
+                    </div>
+                    <div class="hint">Keep the original copy filed at the office — digital upload is not required here.</div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<!-- Fixed Action Bar -->
+<div class="action-bar">
+    <button type="button" class="btn btn-secondary" onclick="saveDraft()">💾 Save Draft</button>
+    <button type="button" class="btn btn-primary" onclick="document.getElementById('bookingForm').requestSubmit()">✓ Submit for Approval</button>
+</div>
+
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+    <div class="modal-content">
+        <div class="modal-icon">✓</div>
+        <h2>Booking Submitted!</h2>
+        <p id="successMessage">Booking ID: <strong></strong><br>It has been sent for Krishan Ji's approval. All tables will update once approved.</p>
+        <button class="btn btn-primary" onclick="resetForm()" style="width:100%;">New Booking Entry</button>
+    </div>
+</div>
+
+<script>
+// ============================================
+// 👇 PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+// ============================================
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCuBNSgnEyWxeBUDht_00IqyX7oIz0P17RTki4zLDipkXqlXMWrW8L6zF8GNgFursh/exec';
+
+// Initialize date and time
+document.getElementById('bookingDate').value = new Date().toISOString().split('T')[0];
+
+// Generate Booking ID
+const year = new Date().getFullYear();
+const randomNum = Math.floor(1000 + Math.random() * 9000);
+document.getElementById('bookingIdDisplay').textContent = `Booking ID: BK-${year}-${randomNum} (Draft)`;
+
+// Initialize first installment row (Advance)
+window.installmentCount = 0;
+addAdvanceRow();
+
+function addAdvanceRow() {
+    const tbody = document.getElementById('installmentRows');
+    const today = new Date().toISOString().split('T')[0];
+    const row = `
+        <tr>
+            <td><strong>1</strong></td>
+            <td><input type="date" id="inst_date_1" value="${today}" onchange="calculateInstallmentsTotal()" readonly style="background:#f1f5f9;"></td>
+            <td><input type="number" id="inst_amount_1" placeholder="Advance" readonly style="background:#f1f5f9;" oninput="calculateInstallmentsTotal()"></td>
+            <td><span style="background:#d1fae5; color:#065f46; padding:3px 8px; border-radius:4px; font-size:11px;">Advance Today</span></td>
+            <td></td>
+        </tr>
+    `;
+    tbody.innerHTML = row;
+    window.installmentCount = 1;
+}
+
+function addInstallment() {
+    window.installmentCount++;
+    const tbody = document.getElementById('installmentRows');
+    const newRow = document.createElement('tr');
+    newRow.id = `inst_row_${window.installmentCount}`;
+    newRow.innerHTML = `
+        <td><strong>${window.installmentCount}</strong></td>
+        <td><input type="date" id="inst_date_${window.installmentCount}" onchange="calculateInstallmentsTotal()"></td>
+        <td><input type="number" id="inst_amount_${window.installmentCount}" placeholder="Amount" oninput="calculateInstallmentsTotal()"></td>
+        <td><input type="text" id="inst_note_${window.installmentCount}" placeholder="e.g., Fixed date, Registry"></td>
+        <td><button type="button" class="delete-btn" onclick="deleteInstallment(${window.installmentCount})">×</button></td>
+    `;
+    tbody.appendChild(newRow);
+}
+
+function deleteInstallment(num) {
+    const row = document.getElementById(`inst_row_${num}`);
+    if (row) row.remove();
+    calculateInstallmentsTotal();
+}
+
+function calculateAmounts() {
+    const size = parseFloat(document.getElementById('plotSize').value) || 0;
+    const baseRate = parseFloat(document.getElementById('baseRate').value) || 0;
+    const negRate = parseFloat(document.getElementById('finalRate').value) || 0;
+    const advance = parseFloat(document.getElementById('advanceAmount').value) || 0;
+
+    // Base total
+    if (size && baseRate) {
+        document.getElementById('baseTotal').value = `₹ ${(size * baseRate).toLocaleString('en-IN')}`;
+    }
+
+    // Auto-fill total deal if size and neg rate present and total not manually changed
+    if (size && negRate && !document.getElementById('totalDealAmount').dataset.manual) {
+        document.getElementById('totalDealAmount').value = size * negRate;
+    }
+
+    // Discount calculation
+    const baseAmount = size * baseRate;
+    const dealAmount = parseFloat(document.getElementById('totalDealAmount').value) || 0;
+    const discount = baseAmount - dealAmount;
+
+    if (discount > 0 && baseAmount > 0) {
+        const discountPct = ((discount / baseAmount) * 100).toFixed(1);
+        document.getElementById('discountBox').style.display = 'block';
+        document.getElementById('discountReasonField').style.display = 'block';
+        document.getElementById('discountAmount').textContent = `₹ ${discount.toLocaleString('en-IN')} (${discountPct}%)`;
+    } else {
+        document.getElementById('discountBox').style.display = 'none';
+        document.getElementById('discountReasonField').style.display = 'none';
+    }
+
+    // Summary
+    document.getElementById('summaryTotal').textContent = `₹ ${dealAmount.toLocaleString('en-IN')}`;
+    document.getElementById('summaryAdvance').textContent = `₹ ${advance.toLocaleString('en-IN')}`;
+    document.getElementById('summaryBalance').textContent = `₹ ${(dealAmount - advance).toLocaleString('en-IN')}`;
+
+    // Update advance row in installments
+    if (document.getElementById('inst_amount_1')) {
+        document.getElementById('inst_amount_1').value = advance;
+        calculateInstallmentsTotal();
+    }
+}
+
+function calculateInstallmentsTotal() {
+    let total = 0;
+    for (let i = 1; i <= window.installmentCount; i++) {
+        const input = document.getElementById(`inst_amount_${i}`);
+        if (input) total += parseFloat(input.value) || 0;
+    }
+
+    document.getElementById('installmentsTotal').textContent = `₹ ${total.toLocaleString('en-IN')}`;
+
+    const dealAmount = parseFloat(document.getElementById('totalDealAmount').value) || 0;
+    const matchCell = document.getElementById('installmentsMatch');
+
+    if (dealAmount > 0) {
+        if (Math.abs(total - dealAmount) < 1) {
+            matchCell.innerHTML = '<span style="color:#065f46; font-size:11px;">✓ Matches deal</span>';
+        } else {
+            const diff = dealAmount - total;
+            matchCell.innerHTML = `<span style="color:#dc2626; font-size:11px;">Diff: ₹${Math.abs(diff).toLocaleString('en-IN')}</span>`;
+        }
+    }
+}
+
+function checkCashLimit() {
+    const mode = document.getElementById('paymentMode').value;
+    const cashField = document.getElementById('cashAmountField');
+    const chequeField = document.getElementById('chequeDetailsField');
+    const warning = document.getElementById('cashWarning');
+    const advance = parseFloat(document.getElementById('advanceAmount').value) || 0;
+
+    if (mode === 'cash') {
+        cashField.style.display = 'block';
+        document.getElementById('cashComponent').value = advance;
+        chequeField.style.display = 'none';
+
+        if (advance > 11000) {
+            warning.className = 'validation-msg error';
+            warning.textContent = `⚠️ Income Tax Alert: ₹${advance.toLocaleString('en-IN')} exceeds the cash limit (₹11,000)! Please convert to Cheque/UPI.`;
+        } else if (advance > 0) {
+            warning.className = 'validation-msg';
+            warning.style.display = 'block';
+            warning.style.color = '#065f46';
+            warning.textContent = '✓ Within cash limit';
+        }
+    } else if (mode === 'mixed') {
+        cashField.style.display = 'block';
+        chequeField.style.display = 'block';
+    } else if (mode === 'cheque' || mode === 'upi' || mode === 'bank_transfer') {
+        cashField.style.display = 'none';
+        chequeField.style.display = 'block';
+    } else {
+        cashField.style.display = 'none';
+        chequeField.style.display = 'none';
+    }
+}
+
+function handleFileUpload(input, displayId) {
+    if (input.files && input.files[0]) {
+        document.getElementById(displayId).style.display = 'block';
+        document.getElementById(displayId).textContent = `✓ ${input.files[0].name}`;
+    }
+}
+
+// Mark total as manually edited
+document.getElementById('totalDealAmount').addEventListener('change', function() {
+    this.dataset.manual = 'true';
+});
+
+function validateForm() {
+    // Check installments match
+    const dealAmount = parseFloat(document.getElementById('totalDealAmount').value) || 0;
+    let installmentsTotal = 0;
+    for (let i = 1; i <= window.installmentCount; i++) {
+        const input = document.getElementById(`inst_amount_${i}`);
+        if (input) installmentsTotal += parseFloat(input.value) || 0;
+    }
+
+    if (Math.abs(installmentsTotal - dealAmount) > 1) {
+        alert(`⚠️ Installments total (₹${installmentsTotal.toLocaleString('en-IN')}) does not match the deal amount (₹${dealAmount.toLocaleString('en-IN')})!\n\nDifference: ₹${Math.abs(dealAmount - installmentsTotal).toLocaleString('en-IN')}\n\nPlease correct it.`);
+        return false;
+    }
+
+    // Check all installment dates are filled
+    for (let i = 1; i <= window.installmentCount; i++) {
+        const dateInput = document.getElementById(`inst_date_${i}`);
+        if (dateInput && !dateInput.value) {
+            alert(`⚠️ Installment #${i}'s date is not filled. Please enter a specific calendar date.`);
+            return false;
+        }
+    }
+
+    // Cash limit check
+    const mode = document.getElementById('paymentMode').value;
+    const advance = parseFloat(document.getElementById('advanceAmount').value) || 0;
+    if (mode === 'cash' && advance > 11000) {
+        if (!confirm(`⚠️ Cash ₹${advance.toLocaleString('en-IN')} exceeds the Income Tax limit (₹11,000)!\n\nDo you still want to proceed?`)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function calculateSizeFromDimensions() {
+    const raw = document.getElementById('plotDimensions').value;
+    // Accepts formats like: 25x40, 25*40, 25 x 40, 25 X 40
+    const match = raw.match(/(\d+(?:\.\d+)?)\s*[xX*×]\s*(\d+(?:\.\d+)?)/);
+    if (match) {
+        const w = parseFloat(match[1]);
+        const h = parseFloat(match[2]);
+        if (w && h) {
+            document.getElementById('plotSize').value = (w * h);
+            calculateAmounts();
+        }
+    }
+}
+
+// Enter dabate hi field-fill hone ke baad focus automatically next field pe chala jaye
+(function enableEnterToNextField() {
+    document.getElementById('bookingForm').addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+
+        const el = e.target;
+        const tag = el.tagName.toLowerCase();
+
+        // Textarea mein Enter se naya line banne do, form aage na badhe
+        if (tag === 'textarea') return;
+
+        // Submit button pe Enter normal kaam kare
+        if (el.type === 'submit') return;
+
+        e.preventDefault();
+
+        const focusable = Array.from(
+            document.querySelectorAll('#bookingForm input, #bookingForm select, #bookingForm textarea, #bookingForm button')
+        ).filter(f => !f.disabled && !f.readOnly && f.offsetParent !== null);
+
+        const currentIndex = focusable.indexOf(el);
+        if (currentIndex > -1 && currentIndex < focusable.length - 1) {
+            const nextField = focusable[currentIndex + 1];
+            nextField.focus();
+            if (nextField.select) nextField.select();
+        }
+    });
+})();
+
+function collectInstallments() {
+    const parts = [];
+    for (let i = 1; i <= window.installmentCount; i++) {
+        const d = document.getElementById(`inst_date_${i}`);
+        const a = document.getElementById(`inst_amount_${i}`);
+        if (!d) continue;
+        let note = (i === 1) ? 'Advance Today' : (document.getElementById(`inst_note_${i}`)?.value || '');
+        const amt = (parseFloat(a && a.value) || 0).toLocaleString('en-IN');
+        parts.push(`#${i} ${d.value || 'N/A'} - Rs.${amt}${note ? ' (' + note + ')' : ''}`);
+    }
+    return parts.join(' | ');
+}
+
+function submitForm(event) {
+    event.preventDefault();
+
+    if (!validateForm()) return false;
+
+    // Collect all form data (matches columns in the Google Sheet)
+    const formData = {
+        timestamp: new Date().toISOString(),
+        bookingId: document.getElementById('bookingIdDisplay').textContent.replace('Booking ID: ', '').replace(' (Draft)', ''),
+        customerName: document.getElementById('customerName').value,
+        phonePrimary: document.getElementById('phonePrimary').value,
+        phoneAlternate: document.getElementById('phoneAlternate').value,
+        address: document.getElementById('address').value,
+        nativePlace: document.getElementById('nativePlace').value,
+        occupation: document.getElementById('occupation').value,
+        decisionMaker: document.getElementById('decisionMaker').value,
+        leadSource: document.getElementById('leadSource').value,
+        sourceReference: document.getElementById('sourceReference').value,
+        colony: document.getElementById('colony').selectedOptions[0] ? document.getElementById('colony').selectedOptions[0].text : '',
+        plotNumber: document.getElementById('plotNumber').value,
+        plotDimensions: document.getElementById('plotDimensions').value,
+        plotSize: document.getElementById('plotSize').value,
+        plotCategory: document.getElementById('plotCategory').value,
+        cornerStatus: document.getElementById('cornerStatus').value,
+        baseRate: document.getElementById('baseRate').value,
+        baseTotal: document.getElementById('baseTotal').value,
+        bookingDate: document.getElementById('bookingDate').value,
+        finalRate: document.getElementById('finalRate').value,
+        totalDealAmount: document.getElementById('totalDealAmount').value,
+        discountAmount: document.getElementById('discountAmount').textContent || '',
+        discountReason: document.getElementById('discountReason').value,
+        advanceAmount: document.getElementById('advanceAmount').value,
+        paymentMode: document.getElementById('paymentMode').value,
+        cashComponent: document.getElementById('cashComponent').value,
+        chequeNumber: document.getElementById('chequeNumber').value,
+        aadhaarNumber: document.getElementById('aadhaarNumber').value,
+        panNumber: document.getElementById('panNumber').value,
+        installments: collectInstallments()
+    };
+
+    console.log('Form Data Submitted:', formData);
+
+    // Save to localStorage as backup (works even if internet fails)
+    const submissions = JSON.parse(localStorage.getItem('booking_submissions_short') || '[]');
+    submissions.push(formData);
+    localStorage.setItem('booking_submissions_short', JSON.stringify(submissions));
+
+    // Send to Google Sheet via Apps Script
+    if (SCRIPT_URL && SCRIPT_URL !== 'PASTE_YOUR_WEB_APP_URL_HERE') {
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(formData)
+        })
+        .then(() => {
+            document.querySelector('#successMessage strong').textContent = formData.bookingId;
+            document.getElementById('successModal').classList.add('active');
+        })
+        .catch(() => {
+            alert('⚠️ Google Sheet se connect nahi ho paaya. Data localStorage mein safe hai — internet check karke phir se try karein (Save Draft se data nahi jayega).');
+        });
+    } else {
+        alert('⚠️ SCRIPT_URL abhi set nahi hai. Google Apps Script deploy karke uska URL SCRIPT_URL variable mein paste karein.');
+        document.querySelector('#successMessage strong').textContent = formData.bookingId;
+        document.getElementById('successModal').classList.add('active');
+    }
+
+    return false;
+}
+
+function saveDraft() {
+    const draft = {};
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+        if (el.id) {
+            if (el.type === 'checkbox') draft[el.id] = el.checked;
+            else draft[el.id] = el.value;
+        }
+    });
+    localStorage.setItem('booking_draft_short', JSON.stringify(draft));
+    alert('✓ Draft saved! Data will remain even after page reload.');
+}
+
+function loadDraft() {
+    const draft = localStorage.getItem('booking_draft_short');
+    if (draft) {
+        const data = JSON.parse(draft);
+        Object.keys(data).forEach(key => {
+            const el = document.getElementById(key);
+            if (el) {
+                if (el.type === 'checkbox') el.checked = data[key];
+                else if (data[key]) el.value = data[key];
+            }
+        });
+        calculateAmounts();
+    }
+}
+
+function resetForm() {
+    document.getElementById('successModal').classList.remove('active');
+    document.getElementById('bookingForm').reset();
+    localStorage.removeItem('booking_draft_short');
+
+    // Generate new ID
+    const newRandomNum = Math.floor(1000 + Math.random() * 9000);
+    document.getElementById('bookingIdDisplay').textContent = `Booking ID: BK-${year}-${newRandomNum} (Draft)`;
+
+    document.getElementById('bookingDate').value = new Date().toISOString().split('T')[0];
+
+    addAdvanceRow();
+
+    document.getElementById('summaryTotal').textContent = '₹ 0';
+    document.getElementById('summaryAdvance').textContent = '₹ 0';
+    document.getElementById('summaryBalance').textContent = '₹ 0';
+
+    window.scrollTo(0, 0);
+}
+
+// Auto-load draft on page load
+window.addEventListener('load', loadDraft);
+</script>
+
+</body>
+</html>
