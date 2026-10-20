@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>बुकिंग एंट्री फॉर्म - Akshardham Associates</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f5f7fa; color: #1a1a1a; line-height: 1.5; padding-bottom: 100px; }
+.header { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); color: white; padding: 20px 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.header-content { max-width: 720px; margin: 0 auto; }
+.header h1 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.header p { font-size: 12px; opacity: 0.9; }
+.booking-id { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 6px; font-size: 11px; display: inline-block; margin-top: 8px; font-weight: 500; }
+.container { max-width: 720px; margin: 16px auto; padding: 0 12px; }
+.section { background: white; border-radius: 12px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.section-header { background: #f8fafc; padding: 14px 16px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; gap: 10px; }
+.section-number { width: 28px; height: 28px; border-radius: 50%; background: #1e40af; color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+.section-title { font-size: 15px; font-weight: 600; color: #1e293b; }
+.section-subtitle { font-size: 11px; color: #64748b; margin-top: 2px; }
+.section-body { padding: 16px; }
+.field { margin-bottom: 14px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.field-row .field { margin-bottom: 0; }
+@media (max-width: 480px) { .field-row { grid-template-columns: 1fr; gap: 0; } .field-row .field { margin-bottom: 14px; } .field-row .field:last-child { margin-bottom: 0; } }
+label { display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 6px; }
+.required::after { content: ' *'; color: #dc2626; font-weight: 700; }
+.hint { font-size: 11px; color: #64748b; margin-top: 4px; font-style: italic; }
+input[type="text"], input[type="tel"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 14px; background: white; transition: all 0.2s; font-family: inherit;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: #1e40af; box-shadow: 0 0 0 3px rgba(30,64,175,0.1); }
+input[readonly], input.calculated { background: #f1f5f9; color: #475569; cursor: not-allowed; }
+textarea { resize: vertical; min-height: 70px; }
+select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 10px center; background-size: 16px; padding-right: 36px; }
+.highlight-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 10px 12px; border-radius: 6px; margin-top: 8px; }
+.highlight-box.success { background: #d1fae5; border-left-color: #10b981; }
+.highlight-box.danger { background: #fee2e2; border-left-color: #dc2626; }
+.highlight-label { font-size: 11px; color: #78350f; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.highlight-value { font-size: 18px; font-weight: 700; color: #92400e; margin-top: 2px; }
+.highlight-box.success .highlight-label { color: #065f46; }
+.highlight-box.success .highlight-value { color: #047857; }
+.highlight-box.danger .highlight-label { color: #991b1b; }
+.highlight-box.danger .highlight-value { color: #b91c1c; }
+.installments-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+.installments-table th { background: #f1f5f9; padding: 8px 6px; text-align: left; font-size: 11px; font-weight: 600; color: #475569; text-transform: uppercase; }
+.installments-table td { padding: 6px; border-bottom: 1px solid #e2e8f0; }
+.installments-table input { padding: 6px 8px; font-size: 13px; }
+.installments-table .delete-btn { background: #fee2e2; color: #dc2626; border: none; border-radius: 6px; width: 28px; height: 28px; cursor: pointer; font-size: 14px; }
+.add-installment { margin-top: 10px; padding: 8px 16px; background: #dbeafe; color: #1e40af; border: 1px dashed #1e40af; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; width: 100%; }
+.add-installment:hover { background: #bfdbfe; }
+.total-row { background: #f8fafc; font-weight: 600; }
+.total-row td { border-top: 2px solid #1e40af; padding: 10px 6px; }
+.file-upload { border: 2px dashed #cbd5e1; border-radius: 8px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.2s; background: #f8fafc; }
+.file-upload:hover { border-color: #1e40af; background: #eff6ff; }
+.file-upload input[type="file"] { display: none; }
+.file-upload-text { font-size: 13px; color: #475569; }
+.file-upload-text span { color: #1e40af; font-weight: 600; }
+.uploaded-file { margin-top: 8px; padding: 6px 10px; background: #d1fae5; border-radius: 6px; font-size: 12px; color: #065f46; display: none; }
+.confirm-box { border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 12px; display: flex; align-items: flex-start; gap: 10px; background: #f8fafc; }
+.confirm-box input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: #1e40af; flex-shrink: 0; }
+.confirm-box label { margin-bottom: 0; font-size: 13px; font-weight: 500; color: #334155; }
+.validation-msg { font-size: 12px; margin-top: 4px; display: none; }
+.validation-msg.error { color: #dc2626; display: block; }
+.validation-msg.warning { color: #d97706; display: block; }
+.action-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 16px; box-shadow: 0 -2px 12px rgba(0,0,0,0.08); display: flex; gap: 10px; z-index: 90; }
+.btn { flex: 1; padding: 12px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+.btn-primary { background: #1e40af; color: white; }
+.btn-primary:hover { background: #1e3a8a; }
+.btn-secondary { background: #e2e8f0; color: #1e293b; }
+.btn-secondary:hover { background: #cbd5e1; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.summary-bar { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1px solid #7dd3fc; border-radius: 10px; padding: 12px; margin-bottom: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+.summary-item .label { font-size: 10px; color: #0369a1; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.summary-item .value { font-size: 14px; font-weight: 700; color: #0c4a6e; margin-top: 2px; }
+.modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+.modal.active { display: flex; }
+.modal-content { background: white; border-radius: 16px; padding: 32px 24px; max-width: 400px; width: 100%; text-align: center; }
+.modal-icon { width: 64px; height: 64px; background: #d1fae5; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+.modal h2 { font-size: 20px; color: #065f46; margin-bottom: 8px; }
+.modal p { color: #475569; margin-bottom: 24px; font-size: 14px; }
+.warning-banner { background: #fef3c7; border: 1px solid #fbbf24; color: #92400e; padding: 10px 14px; border-radius: 8px; font-size: 12px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.warning-banner strong { font-weight: 700; }
+.autofill-badge { display: inline-block; background: #d1fae5; color: #065f46; font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 600; margin-left: 6px; vertical-align: middle; }
+#familyTable th, #familyTable td { white-space: nowrap; }
+#familyTable input, #familyTable select { min-width: 80px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-content">
+    <h1>🏠 बुकिंग एंट्री फॉर्म</h1>
+    <p>Akshardham Associates · प्लॉट बुकिंग क्विक एंट्री</p>
+    <span class="booking-id" id="bookingIdDisplay">Booking ID: BK-2026-XXXX</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Summary Bar -->
+  <div class="summary-bar">
+    <div class="summary-item"><div class="label">कुल डील</div><div class="value" id="summaryTotal">₹ 0</div></div>
+    <div class="summary-item"><div class="label">एडवांस</div><div class="value" id="summaryAdvance">₹ 0</div></div>
+    <div class="summary-item"><div class="label">बकाया</div><div class="value" id="summaryBalance">₹ 0</div></div>
+  </div>
+
+  <form id="bookingForm" onsubmit="return submitForm(event)">
+
+    <!-- A: ग्राहक की जानकारी -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">A</div>
+        <div><div class="section-title">ग्राहक की जानकारी</div><div class="section-subtitle">Kharidaar ki zaroori jaankari</div></div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label class="required">ग्राहक का पूरा नाम</label>
+          <input type="text" id="customerName" placeholder="जैसे: मंगीलाल जी पाटीदार" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="required">मोबाइल नंबर</label>
+            <input type="tel" id="phonePrimary" placeholder="10 अंक" maxlength="10" pattern="[0-9]{10}" required>
+            <div class="validation-msg" id="phoneError"></div>
+          </div>
+          <div class="field">
+            <label>दूसरा नंबर</label>
+            <input type="tel" id="phoneAlternate" placeholder="10 अंक" maxlength="10" pattern="[0-9]{10}">
+          </div>
+        </div>
+        <div class="field">
+          <label class="required">पूरा पता</label>
+          <textarea id="address" placeholder="गाँव, तहसील, जिला" required></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>मूल निवास</label>
+            <input type="text" id="nativePlace" placeholder="जैसे: खानपुर, झालावाड़">
+          </div>
+          <div class="field">
+            <label class="required">व्यवसाय</label>
+            <input type="text" id="occupation" placeholder="जैसे: किसान, दुकानदार, नौकरी" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="required">सोर्स</label>
+          <select id="leadSource" required>
+            <option value="">सोर्स चुनें...</option>
+            <option value="retailer">रिटेलर रेफरेंस</option>
+            <option value="agent">एजेंट (पुराना)</option>
+            <option value="youth_agent">यूथ एजेंट</option>
+            <option value="walk_in">वॉक-इन</option>
+            <option value="facebook">फेसबुक ऐड</option>
+            <option value="instagram">इंस्टाग्राम</option>
+            <option value="whatsapp">व्हाट्सऐप</option>
+            <option value="referral">ग्राहक रेफरेंस</option>
+            <option value="other">अन्य</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- B: प्लॉट की जानकारी -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">B</div>
+        <div><div class="section-title">प्लॉट की जानकारी</div><div class="section-subtitle">Kaunsa plot book ho raha hai</div></div>
+      </div>
+      <div class="section-body">
+        <div class="field-row">
+          <div class="field">
+            <label class="required">कॉलोनी</label>
+            <select id="colony" required onchange="onColonyChange()">
+              <option value="">कॉलोनी चुनें...</option>
+              <option value="gopal_vihar">गोपाल विहार, खानपुर</option>
+              <option value="akshardham">अक्षरधाम कॉलोनी</option>
+              <option value="anjani_nagar">अंजनी नगर</option>
+              <option value="dwarika_nagar">द्वारिका नगर</option>
+              <option value="new_dwarika">न्यू द्वारिका नगर</option>
+              <option value="new_akshardham">न्यू अक्षरधाम</option>
+              <option value="mahaveer">महावीर नगर मेगा हाईवे</option>
+              <option value="mukut_nagar">मुकुट नगर</option>
+              <option value="mukesh_new_dwarika">मुकेश जी न्यू द्वारिका</option>
+              <option value="vinayak_residency">विनायक रेसीडेंसी, झालावाड़</option>
+              <option value="ambika">अंबिका कॉलोनी</option>
+              <option value="other">अन्य (रिमार्क में लिखें)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="required">प्लॉट नंबर <span class="autofill-badge" id="autoFillBadge" style="display:none;">ऑटो</span></label>
+            <input type="text" id="plotNumber" list="plotDatalist" placeholder="प्लॉट नंबर चुनें या टाइप करें" required oninput="onPlotChange()" autocomplete="off">
+            <datalist id="plotDatalist"></datalist>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="required">साइज़ (वर्गफुट)</label>
+            <input type="number" id="plotSize" placeholder="जैसे: 1000" min="100" required oninput="calculateAmounts()">
+            <div class="hint" id="sizeHint"></div>
+          </div>
+          <div class="field">
+            <label class="required">प्लॉट कैटेगरी</label>
+            <select id="plotCategory" required>
+              <option value="">चुनें...</option>
+              <option value="40ft_road">40 फुट रोड</option>
+              <option value="30ft_road">30 फुट रोड</option>
+              <option value="corner">कॉर्नर प्लॉट</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>दिशा (Facing)</label>
+            <select id="facing">
+              <option value="">चुनें...</option>
+              <option value="north">उत्तर (North)</option>
+              <option value="south">दक्षिण (South)</option>
+              <option value="east">पूर्व (East)</option>
+              <option value="west">पश्चिम (West)</option>
+              <option value="ne">उत्तर-पूर्व</option>
+              <option value="nw">उत्तर-पश्चिम</option>
+              <option value="se">दक्षिण-पूर्व</option>
+              <option value="sw">दक्षिण-पश्चिम</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>कुल राशि (₹)</label>
+            <input type="number" id="baseTotal" placeholder="प्लॉट की कुल वैल्यू" oninput="calculateAmounts()">
+            <div class="hint">साइज़ × रेट (मैन्युअल)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C: डील की शर्तें -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">C</div>
+        <div><div class="section-title">डील की शर्तें</div><div class="section-subtitle">Final price aur advance details</div></div>
+      </div>
+      <div class="section-body">
+        <div class="field-row">
+          <div class="field">
+            <label class="required">बुकिंग दिनांक</label>
+            <input type="date" id="bookingDate" required>
+          </div>
+          <div class="field">
+            <label class="required">तय रेट (₹ प्रति वर्गफुट)</label>
+            <input type="number" id="negotiatedRate" placeholder="जैसे: 950" required oninput="calculateAmounts()">
+          </div>
+        </div>
+        <div class="field">
+          <label class="required">कुल डील राशि (₹)</label>
+          <input type="number" id="totalDealAmount" placeholder="ऑटो-कैल्कुलेट या खुद भरें" required oninput="calculateAmounts()">
+          <div class="hint">साइज़ × तय रेट (बदल भी सकते हैं)</div>
+        </div>
+        <div class="highlight-box" id="discountBox" style="display:none;">
+          <div class="highlight-label">दी गई छूट</div>
+          <div class="highlight-value" id="discountAmount">₹ 0</div>
+        </div>
+        <div class="field" id="discountReasonField" style="display:none;">
+          <label class="required">छूट का कारण</label>
+          <textarea id="discountReason" placeholder="जैसे: पारिवारिक डील, पुराना ग्राहक आदि"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="required">आज की एडवांस राशि (₹)</label>
+            <input type="number" id="advanceAmount" placeholder="जैसे: 200000" required oninput="calculateAmounts(); checkCashLimit();">
+          </div>
+          <div class="field">
+            <label class="required">भुगतान का तरीका</label>
+            <select id="paymentMode" required onchange="checkCashLimit()">
+              <option value="">चुनें...</option>
+              <option value="cash">नकद (Cash)</option>
+              <option value="cheque">चेक (Cheque)</option>
+              <option value="upi">UPI</option>
+              <option value="bank_transfer">बैंक ट्रांसफर / NEFT / RTGS</option>
+              <option value="mixed">मिश्रित (नकद + अन्य)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" id="cashAmountField" style="display:none;">
+          <label>नकद राशि (₹)</label>
+          <input type="number" id="cashComponent" placeholder="कुल नकद राशि" oninput="checkCashLimit()">
+          <div class="validation-msg" id="cashWarning"></div>
+        </div>
+        <div class="field" id="chequeDetailsField" style="display:none;">
+          <label>चेक / रेफरेंस नंबर</label>
+          <input type="text" id="chequeNumber" placeholder="चेक नंबर या ट्रांजेक्शन ID">
+        </div>
+      </div>
+    </div>
+
+    <!-- D: किस्त अनुसूची -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">D</div>
+        <div><div class="section-title">किस्त अनुसूची</div><div class="section-subtitle">Har date FIXED hona chahiye</div></div>
+      </div>
+      <div class="section-body">
+        <div class="warning-banner">
+          <span>⚠️</span>
+          <div><strong>ज़रूरी:</strong> "मई में" जैसी अधूरी तारीखें नहीं चलेंगी। पक्की कैलेंडर तारीख ही डालें।</div>
+        </div>
+        <table class="installments-table">
+          <thead>
+            <tr><th>#</th><th>तारीख</th><th>राशि (₹)</th><th>नोट</th><th></th></tr>
+          </thead>
+          <tbody id="installmentRows"></tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td colspan="2">कुल किस्तें</td>
+              <td id="installmentsTotal">₹ 0</td>
+              <td colspan="2" id="installmentsMatch"></td>
+            </tr>
+          </tfoot>
+        </table>
+        <button type="button" class="add-installment" onclick="addInstallment()">+ किस्त जोड़ें</button>
+      </div>
+    </div>
+
+    <!-- E: पारिवारिक विवरण -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">E</div>
+        <div><div class="section-title">पारिवारिक विवरण</div><div class="section-subtitle">Parivar ke sadasyon ki jaankari</div></div>
+      </div>
+      <div class="section-body">
+        <div class="field-row">
+          <div class="field">
+            <label>ग्राहक की जन्म तिथि</label>
+            <input type="date" id="customerDob">
+          </div>
+          <div class="field">
+            <label>विवाह वर्षगांठ</label>
+            <input type="date" id="anniversaryDate">
+          </div>
+        </div>
+        <div style="margin-top:8px;">
+          <label style="margin-bottom:8px; display:block;">परिवार के सदस्य</label>
+          <div style="overflow-x:auto;">
+            <table class="installments-table" id="familyTable">
+              <thead>
+                <tr>
+                  <th style="min-width:28px;">#</th>
+                  <th style="min-width:90px;">रिश्ता</th>
+                  <th style="min-width:110px;">नाम</th>
+                  <th style="min-width:50px;">उम्र</th>
+                  <th style="min-width:110px;">जन्म तिथि</th>
+                  <th style="min-width:110px;">व्यवसाय</th>
+                  <th style="min-width:120px;">करियर इच्छा</th>
+                  <th style="min-width:100px;">टिप्पणी</th>
+                  <th style="min-width:28px;"></th>
+                </tr>
+              </thead>
+              <tbody id="familyRows"></tbody>
+            </table>
+          </div>
+          <button type="button" class="add-installment" onclick="addFamilyRow()" style="margin-top:10px;">+ सदस्य जोड़ें</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- F: दस्तावेज़ -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-number">F</div>
+        <div><div class="section-title">दस्तावेज़</div><div class="section-subtitle">Photo + Aadhaar/PAN xerox confirmation</div></div>
+      </div>
+      <div class="section-body">
+        <div class="field">
+          <label class="required">ग्राहक का फोटो</label>
+          <label class="file-upload">
+            <input type="file" accept="image/*" onchange="handleFileUpload(this,'photoFile')">
+            <div class="file-upload-text">📷 <span>फोटो अपलोड करें</span> — क्लिक करें</div>
+          </label>
+          <div class="uploaded-file" id="photoFile">✓ अपलोड हो गया</div>
+        </div>
+        <div class="field">
+          <div class="confirm-box">
+            <input type="checkbox" id="xeroxConfirm" required>
+            <label for="xeroxConfirm" class="required">ग्राहक से आधार और PAN की फोटोकॉपी ले ली गई है</label>
+          </div>
+          <div class="hint">असली कॉपी ऑफिस में फाइल करके रखें — यहाँ डिजिटल अपलोड ज़रूरी नहीं।</div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<div class="action-bar">
+  <button type="button" class="btn btn-secondary" onclick="saveDraft()">💾 ड्राफ्ट सेव करें</button>
+  <button type="button" class="btn btn-primary" onclick="document.getElementById('bookingForm').requestSubmit()">✓ अप्रूवल के लिए जमा करें</button>
+</div>
+
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <div class="modal-icon">✓</div>
+    <h2>बुकिंग जमा हो गई!</h2>
+    <p id="successMessage">Booking ID: <strong></strong><br>Krishan Ji के अप्रूवल के लिए भेज दी गई है।</p>
+    <button class="btn btn-primary" onclick="resetForm()" style="width:100%;">नई बुकिंग एंट्री</button>
+  </div>
+</div>
+
+<script>
+// ─── Colony Plot Data ──────────────────────────────────────────
+const colonyData = {
+  gopal_vihar: [
+    {no:"A1",size:"25*60"},{no:"A2",size:"25*60"},{no:"A3",size:"25*60"},{no:"A4",size:"25*60"},{no:"A5",size:"25*60"},
+    {no:"A6",size:"25*60"},{no:"A7",size:"30*60"},{no:"A8",size:"30*40"},{no:"A9",size:"25*40"},{no:"A10",size:"25*40"},
+    {no:"A11",size:"25*40"},{no:"A12",size:"25*40"},{no:"A13",size:"25*40"},{no:"A14",size:"21*40"},{no:"A15",size:"23*40"},
+    {no:"A16",size:"25*40"},{no:"A17",size:"25*44"},{no:"A18",size:"25*42"},{no:"A19",size:"25*42"},{no:"A20",size:"25*41"},
+    {no:"A21",size:"25*39"},{no:"A22",size:"25*37"},{no:"A23",size:"30*30"},{no:"A24",size:"38*45"},{no:"A25",size:"25*45"},
+    {no:"A26",size:"25*45"},{no:"A27",size:"25*45"},{no:"A28",size:"25*45"},{no:"A29",size:"25*45"},{no:"A30",size:"25*45"},
+    {no:"A31",size:"25*45"},{no:"A32",size:"25*45"},{no:"A33",size:"25*45"},{no:"A34",size:"25*45"},{no:"A35",size:"25*45"},
+    {no:"A36",size:"25*45"},{no:"A37",size:"75*29"},
+    {no:"B1",size:"32*60"},{no:"B2",size:"25*60"},{no:"B3",size:"25*60"},{no:"B4",size:"25*60"},{no:"B5",size:"25*60"},
+    {no:"B6",size:"25*60"},{no:"B7",size:"25*60"},{no:"B8",size:"30*60"},{no:"B9",size:"30*40"},{no:"B10",size:"25*40"},
+    {no:"B11",size:"25*40"},{no:"B12",size:"25*40"},{no:"B13",size:"25*40"},{no:"B14",size:"25*40"},{no:"B15",size:"45*40"},
+    {no:"B16",size:"40*39"},{no:"B17",size:"25*40"},{no:"B18",size:"25*40"},{no:"B19",size:"25*40"},{no:"B20",size:"28*40"},
+    {no:"B21",size:"41*29"},{no:"B22",size:"25*40"},{no:"B23",size:"25*40"},{no:"B24",size:"70*30"},{no:"B25",size:"31*40"},
+    {no:"B26",size:"40*40"},{no:"B27",size:"29*40"},{no:"B28",size:"30*26"},
+    {no:"C1",size:"20*25"},{no:"C2",size:"25*60"},{no:"C3",size:"25*80"},{no:"C4",size:"30*60"},{no:"C5",size:"25*60"},
+    {no:"C6",size:"25*60"},{no:"C7",size:"25*60"},{no:"C8",size:"25*80"},{no:"C9",size:"25*55"},{no:"C10",size:"15*50"}
+  ],
+  akshardham: [
+    {no:"A1 1",size:"25*90"},{no:"A1 2",size:"25*60"},{no:"A1 3",size:"30*25"},{no:"A1 4",size:"30*25"},{no:"A1 5",size:"25*90"},
+    {no:"A1 6",size:"60*25"},{no:"A1 7",size:"60*25"},{no:"A1 8",size:"30*25"},{no:"A1 9",size:"25*40"},{no:"A1 10",size:"25*40"},
+    {no:"A1 11",size:"25*40"},{no:"A1 12",size:"30*40"},{no:"A1 13",size:"30*40"},{no:"A1 14",size:"25*40"},{no:"A1 15",size:"20*40"},
+    {no:"A1 16",size:"20*40"},{no:"A1 17",size:"25*40"},{no:"A1 18",size:"25*40"},{no:"A1 19",size:"25*38"},{no:"A1 20",size:"20*30"},
+    {no:"A1 21",size:"20*30"},{no:"A1 22",size:"20*30"},
+    {no:"1",size:"25*58"},{no:"2",size:"25*58"},{no:"3",size:"25*58"},{no:"4",size:"25*58"},{no:"5",size:"25*58"},
+    {no:"6",size:"25*58"},{no:"7",size:"30*40"},{no:"8",size:"28*40"},{no:"9",size:"30*40"},{no:"10",size:"28*40"},
+    {no:"11",size:"25*40"},{no:"12/13",size:"55*40"},{no:"14",size:"20*35"},{no:"15",size:"20*35"},{no:"16",size:"20*30"},
+    {no:"17",size:"17*28"},{no:"18",size:"20*40"},{no:"19",size:"20*40"},{no:"20",size:"20*40"},{no:"21",size:"20*40"},
+    {no:"22",size:"20*40"},{no:"23",size:"20*40"},{no:"24",size:"20*40"},{no:"25",size:"20*40"},{no:"26",size:"10*15"},
+    {no:"27",size:"23*40"},{no:"28",size:"25*30"},{no:"29",size:"25*58"},{no:"30",size:"35*27"},{no:"31",size:"30*35"},
+    {no:"32",size:"30*40"},{no:"33",size:"25*40"},{no:"34",size:"25*40"},{no:"35",size:"25*40"},{no:"36",size:"30*40"},
+    {no:"37",size:"30*40"},{no:"38",size:"30*40"},{no:"39",size:"25*40"},{no:"40",size:"25*40"},{no:"41",size:"28*70"},
+    {no:"42/43/44/45",size:"89*40"},{no:"46",size:"22*30"},{no:"47",size:"30*40"},{no:"48",size:"35*40"},{no:"49",size:"25*40"},
+    {no:"50",size:"30*40"},{no:"51",size:"25*40"},{no:"52/53",size:"50*40"},{no:"54",size:"25*40"},{no:"55",size:"25*40"},
+    {no:"56",size:"25*40"},{no:"57",size:"25*40"},{no:"58",size:"25*40"},{no:"59",size:"25*40"},{no:"60",size:"25*40"},
+    {no:"61",size:"25*40"},{no:"62/63",size:"50*40"},{no:"64",size:"25*40"},{no:"65",size:"30*40"},{no:"66",size:"30*40"},
+    {no:"67",size:"25*40"},{no:"68",size:"25*40"},{no:"69",size:"25*40"},{no:"70",size:"25*40"},{no:"71",size:"25*40"},
+    {no:"72",size:"25*40"},{no:"73",size:"25*40"},{no:"74",size:"25*40"},{no:"75",size:"25*40"},{no:"76/77",size:"50*40"},
+    {no:"78",size:"25*40"},{no:"79",size:"25*40"},{no:"80",size:"30*40"},{no:"81",size:"30*40"},{no:"82",size:"30*40"},
+    {no:"83A",size:"20*40"},{no:"83B",size:"20*40"},{no:"84",size:"20*40"},{no:"85",size:"20*40"},{no:"86",size:"20*40"},
+    {no:"87",size:"20*40"},{no:"88/89",size:"55*40"},{no:"90",size:"30*40"},{no:"91",size:"25*40"},{no:"92",size:"20*40"},
+    {no:"93",size:"20*40"},{no:"94/95/96/97",size:"110*40"},{no:"156",size:"25*40"},{no:"157",size:"20*40"},
+    {no:"158",size:"20*40"},{no:"159",size:"20*40"},{no:"160",size:"25*40"},{no:"161",size:"25*40"},{no:"162",size:"15*40"},
+    {no:"163",size:"20*40"},{no:"164",size:"25*40"},{no:"165",size:"25*40"},{no:"168",size:"25*40"},{no:"169",size:"25*40"},
+    {no:"170",size:"15*40"},{no:"171",size:"25*40"},{no:"172",size:"25*40"},{no:"173",size:"25*40"},{no:"174",size:"25*40"},
+    {no:"175",size:"15*40"},{no:"176",size:"20*40"},{no:"177",size:"25*40"},{no:"179",size:"20*30"},{no:"180",size:"20*35"},
+    {no:"181",size:"25*35"},{no:"182",size:"25*35"},{no:"183",size:"25*32"},{no:"184",size:"25*30"},{no:"185",size:"25*30"}
+  ],
+  anjani_nagar: [
+    {no:"1",size:"25*60"},{no:"2",size:"25*60"},{no:"3",size:"25*60"},{no:"4",size:"23*60"},{no:"5",size:"25*45"},
+    {no:"6",size:"25*44"},{no:"7",size:""},{no:"8",size:"21*50"},{no:"9",size:"21*50"},{no:"10",size:"25*40"},
+    {no:"11",size:"25*38"},{no:"12",size:"25*35"},{no:"13",size:"25*35"},{no:"14",size:"25*35"},{no:"15",size:"25*32"},
+    {no:"16",size:"25*31"},{no:"17",size:"25*31"},{no:"18",size:"20*30"},{no:"19",size:"30*50"},{no:"20",size:"25*50"},
+    {no:"21",size:"25*50"},{no:"22",size:"25*45"},{no:"23",size:"25*42"},{no:"24",size:"25*45"},{no:"25",size:"25*45"},
+    {no:"26",size:"25*45"},{no:"27",size:"25*50"},{no:"28",size:"25*50"},{no:"29",size:"25*45"},{no:"30",size:"25*45"},
+    {no:"31",size:"25*45"},{no:"32",size:"25*45"}
+  ],
+  dwarika_nagar: [
+    {no:"1",size:"60*40"},{no:"3",size:"25*40"},{no:"4",size:"25*40"},{no:"5",size:"25*40"},{no:"6",size:"25*40"},
+    {no:"7",size:"25*40"},{no:"8",size:"25*40"},{no:"9",size:"25*40"},{no:"10",size:"25*40"},{no:"11",size:"25*40"},
+    {no:"12",size:"25*40"},{no:"13",size:"25*40"},{no:"14",size:"35*40"},{no:"15",size:"35*40"},{no:"16",size:"25*40"},
+    {no:"17",size:"25*40"},{no:"18",size:"25*40"},{no:"19",size:"25*40"},{no:"20",size:"25*40"},{no:"21",size:"25*40"},
+    {no:"22",size:"25*40"},{no:"23",size:"25*50"},{no:"24",size:"25*50"},{no:"25",size:"25*40"},{no:"26",size:"25*40"},
+    {no:"27",size:"25*40"},{no:"28",size:"25*40"},{no:"29",size:"25*40"},{no:"30",size:"20*40"},{no:"31",size:"20*40"},
+    {no:"30/31",size:"37*37"},{no:"32",size:"25*40"},{no:"33",size:"25*40"},{no:"34",size:"25*24"},{no:"35",size:"25*25"},
+    {no:"36",size:"25*28"},{no:"37",size:"20*40"},{no:"38",size:"25*40"},{no:"39",size:"25*40"},{no:"40",size:"20*40"},
+    {no:"41",size:"20*40"},{no:"42",size:"20*40"},{no:"43",size:"20*40"}
+  ],
+  new_dwarika: [
+    {no:"1",size:"30*35"},{no:"2",size:"30*34"},{no:"3",size:"24*34"},{no:"4",size:"30*40"},{no:"5",size:"26*50"},
+    {no:"6",size:"25*50"},{no:"7",size:"25*50"},{no:"8",size:"30*50"},{no:"9",size:"30*50"},{no:"10",size:"30*50"},
+    {no:"11",size:"25*50"},{no:"12",size:"80*15"},{no:"13",size:"20*50"},{no:"14",size:"30*43"},{no:"15",size:"30*36"},
+    {no:"16",size:"30*28"},{no:"17",size:"35*60"},{no:"18",size:"23*60"},{no:"19",size:"23*60"},{no:"20",size:"30*60"},
+    {no:"21",size:"30*60"},{no:"22",size:"25*60"},{no:"23",size:"25*60"},{no:"24",size:"25*60"},{no:"25",size:"30*60"}
+  ],
+  new_akshardham: [
+    {no:"1",size:"26*40"},{no:"2",size:"30*22"},{no:"3",size:"30*17"},{no:"4",size:"30*10"},{no:"5",size:"35*40"},
+    {no:"6",size:"25*40"},{no:"7",size:"25*40"},{no:"8",size:"28*40"},{no:"9",size:"25*40"},{no:"10",size:"27*40"},
+    {no:"11/12",size:"40*40"},{no:"12/13",size:"25*40"}
+  ],
+  mahaveer: [
+    {no:"1",size:"30*55"},{no:"2",size:"25*60"},{no:"3",size:"25*40"},{no:"4",size:"25*40"},{no:"5",size:"25*40"},
+    {no:"6",size:"25*40"},{no:"7",size:"25*40"},{no:"8",size:"25*40"},{no:"9",size:"25*40"},{no:"10",size:"25*60"},
+    {no:"11",size:"23*40"},{no:"12",size:"25*40"},{no:"13",size:"25*40"},{no:"14",size:"25*40"},{no:"15",size:"25*40"},
+    {no:"16",size:"25*40"},{no:"17",size:"25*40"},{no:"18",size:"25*40"},{no:"19",size:"25*40"},{no:"20",size:"30*40"},
+    {no:"21",size:"30*40"},{no:"22",size:"25*40"},{no:"23",size:"25*40"},{no:"24",size:"25*40"},{no:"25",size:"25*40"},
+    {no:"26",size:"25*40"},{no:"27",size:"25*40"},{no:"28",size:"25*40"},{no:"29",size:"25*40"},{no:"30",size:"17*40"},
+    {no:"31",size:"35*40"},{no:"32",size:"25*40"},{no:"33",size:"25*40"},{no:"34",size:"25*40"},{no:"35",size:"25*40"},
+    {no:"36",size:"25*40"},{no:"37",size:"25*40"},{no:"38",size:"25*40"},{no:"39",size:"30*40"},{no:"40",size:"30*40"},
+    {no:"41",size:"25*40"},{no:"42",size:"25*40"},{no:"43",size:"25*40"},{no:"44",size:"25*40"},{no:"45",size:"25*40"},
+    {no:"46",size:"25*40"},{no:"47",size:"25*40"},{no:"48",size:"26*40"},{no:"49",size:"15*40"},{no:"50",size:"25*40"},
+    {no:"51",size:"25*40"},{no:"52",size:"25*40"},{no:"53",size:"25*40"},{no:"54",size:"25*40"},{no:"55",size:"25*40"},
+    {no:"56",size:"25*40"},{no:"57",size:"25*40"},{no:"58",size:"30*40"},{no:"59",size:"30*40"},{no:"60",size:"25*40"},
+    {no:"61",size:"25*40"},{no:"62",size:"25*40"},{no:"63",size:"25*40"},{no:"64",size:"25*40"},{no:"65",size:"25*40"},
+    {no:"66",size:"25*40"},{no:"67",size:"25*40"},{no:"68",size:"14*40"},{no:"69",size:"14*40"},{no:"70",size:"25*40"},
+    {no:"71",size:"25*40"},{no:"72",size:"25*40"},{no:"73",size:"25*40"},{no:"74",size:"25*40"},{no:"75",size:"25*40"},
+    {no:"76",size:"25*40"},{no:"77",size:"25*40"},{no:"78",size:"30*40"},{no:"79",size:"30*40"},{no:"80",size:"25*40"},
+    {no:"81",size:"25*40"},{no:"82",size:"25*40"},{no:"83",size:"25*40"},{no:"84",size:"25*40"},{no:"85",size:"25*40"},
+    {no:"86",size:"25*40"},{no:"87",size:"25*40"},{no:"88",size:"23*40"},{no:"89",size:"26*40"},{no:"90",size:"25*40"},
+    {no:"91",size:"25*40"},{no:"92",size:"25*40"},{no:"93",size:"25*40"},{no:"94",size:"25*40"},{no:"95",size:"25*40"},
+    {no:"96",size:"25*40"},{no:"97",size:"25*40"},{no:"98",size:"30*40"},{no:"99",size:"30*40"},{no:"100",size:"25*40"},
+    {no:"101",size:"25*40"},{no:"102",size:"25*40"},{no:"103",size:"25*40"},{no:"104",size:"25*40"},{no:"105/106",size:"50*40"},
+    {no:"107",size:"25*40"},{no:"108",size:"28*40"},{no:"109",size:"30*40"},{no:"110",size:"25*40"},{no:"111",size:"25*40"},
+    {no:"112",size:"25*40"},{no:"113",size:"25*40"},{no:"114",size:"25*40"},{no:"115",size:"25*40"},{no:"116",size:"25*40"},
+    {no:"117",size:"25*40"},{no:"118",size:"30*40"},{no:"119",size:"30*40"},{no:"120",size:"25*40"},{no:"121",size:"25*40"},
+    {no:"122",size:"25*40"},{no:"123",size:"25*40"},{no:"124",size:"25*40"},{no:"125",size:"25*40"},{no:"126",size:"25*40"},
+    {no:"127",size:"25*40"},{no:"128",size:"35*40"}
+  ],
+  mukut_nagar: [
+    {no:"1",size:"30*40"},{no:"2",size:"25*40"},{no:"3",size:"25*40"},{no:"4",size:"20*40"},{no:"5",size:"30*40"},
+    {no:"6",size:"30*40"},{no:"8",size:"25*40"},{no:"9",size:"25*40"},{no:"10",size:"25*40"},{no:"11",size:"25*40"},
+    {no:"12",size:"30*40"},{no:"13",size:"22*30"},{no:"14",size:"25*25"},{no:"15",size:"25*27"},{no:"16",size:"25*28"},
+    {no:"17",size:"25*31"},{no:"18",size:"30*35"},{no:"19",size:"25*40"},{no:"20",size:"22*40"}
+  ],
+  mukesh_new_dwarika: [
+    {no:"A1",size:"25*58"},{no:"A2",size:"25*58"},{no:"11",size:"25*50"},{no:"12",size:"25*50"},{no:"13",size:"25*50"},
+    {no:"14",size:"25*50"},{no:"15",size:"25*50"},{no:"17",size:"30*33"},{no:"18",size:"29*33"}
+  ],
+  vinayak_residency: [
+    // Left Strip (40ft Road)
+    {no:"1",  size:"23*40",   cat:"40ft_road"},
+    {no:"2",  size:"25*40",   cat:"corner"},
+    {no:"3",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
+    {no:"4",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
+    {no:"5",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
+    {no:"6",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
+    {no:"7",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
+    {no:"8",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
+    {no:"9",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
+    {no:"10", size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
+    {no:"11", size:"20*48",   cat:"40ft_road"},
+    {no:"12", size:"20*48",   cat:"40ft_road"},
+    {no:"13", size:"20*48",   cat:"40ft_road"},
+    {no:"14", size:"20*48",   cat:"40ft_road"},
+    {no:"15", size:"20*48",   cat:"40ft_road"},
+    {no:"15 (dup)", size:"20*48", cat:"40ft_road", remark:"Map par 15 do baar"},
+    {no:"16", size:"12*48",   cat:"corner", remark:"Corner confirm nahi"},
+    // Block 2
+    {no:"49", size:"30*40",   cat:"corner"},
+    {no:"50", size:"25*40",   cat:"40ft_road"},
+    {no:"51", size:"25*40",   cat:"corner"},
+    {no:"52", size:"20*40",   cat:"30ft_road"},
+    {no:"53", size:"20*40",   cat:"30ft_road"},
+    {no:"54", size:"20*40",   cat:"30ft_road"},
+    {no:"55", size:"20*40",   cat:"30ft_road"},
+    {no:"56", size:"20*40",   cat:"30ft_road"},
+    {no:"57", size:"20*40",   cat:"30ft_road"},
+    {no:"58", size:"20*40",   cat:"30ft_road"},
+    {no:"59", size:"16.3*40", cat:"30ft_road", remark:"Tirchi boundary"},
+    {no:"42", size:"19.4*40", cat:"30ft_road", remark:"Tirchi boundary"},
+    {no:"43", size:"20*40",   cat:"30ft_road"},
+    {no:"44", size:"25*40",   cat:"30ft_road"},
+    {no:"45", size:"25*40",   cat:"30ft_road"},
+    {no:"46", size:"25*40",   cat:"30ft_road"},
+    {no:"47", size:"25*40",   cat:"30ft_road"},
+    {no:"48", size:"25*40",   cat:"30ft_road"},
+    // Block 3
+    {no:"31", size:"30*40",   cat:"corner"},
+    {no:"32", size:"25*40",   cat:"40ft_road"},
+    {no:"33", size:"25*40",   cat:"corner"},
+    {no:"34", size:"25*40",   cat:"30ft_road"},
+    {no:"35", size:"20*40",   cat:"30ft_road"},
+    {no:"36", size:"20*40",   cat:"30ft_road"},
+    {no:"37", size:"20*40",   cat:"30ft_road"},
+    {no:"38", size:"20*40",   cat:"30ft_road"},
+    {no:"39", size:"20*40",   cat:"30ft_road"},
+    {no:"40", size:"20*40",   cat:"30ft_road"},
+    {no:"41", size:"22.5*40", cat:"30ft_road", remark:"Tirchi boundary"},
+    {no:"B3-L1", size:"25*40",   cat:"30ft_road", remark:"Lower row (map no. unclear)"},
+    {no:"B3-L2", size:"25*40",   cat:"30ft_road"},
+    {no:"B3-L3", size:"25*40",   cat:"30ft_road"},
+    {no:"B3-L4", size:"25*40",   cat:"30ft_road"},
+    {no:"B3-L5", size:"25*40",   cat:"30ft_road"},
+    {no:"B3-L6", size:"25*40",   cat:"30ft_road"},
+    {no:"B3-L7", size:"25.6*40", cat:"30ft_road", remark:"Tirchi boundary"},
+    // Block 4
+    {no:"17", size:"25*40",   cat:"corner"},
+    {no:"18", size:"25*40",   cat:"30ft_road"},
+    {no:"19", size:"25*40",   cat:"30ft_road"},
+    {no:"20", size:"25*40",   cat:"30ft_road"},
+    {no:"21", size:"25*40",   cat:"30ft_road"},
+    {no:"22", size:"25*40",   cat:"30ft_road"},
+    {no:"23", size:"25*40",   cat:"30ft_road"},
+    {no:"24", size:"25*40",   cat:"30ft_road"},
+    {no:"25", size:"20.6*40", cat:"30ft_road", remark:"Tirchi boundary"},
+    // Top Wedge (depth tapering - confirm karo)
+    {no:"60", size:"25.1*?",  cat:"30ft_road", remark:"Depth tapering - map se confirm"},
+    {no:"61", size:"25*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
+    {no:"62", size:"25*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
+    {no:"63", size:"25*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
+    {no:"64", size:"25*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
+    {no:"65", size:"30*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
+    {no:"66", size:"38.25*?", cat:"corner",    remark:"Depth tapering - map se confirm"}
+  ]
+};
+
+// ─── Size parse helper ─────────────────────────────────────────
+function parseSqft(sizeStr) {
+  if (!sizeStr) return 0;
+  const m = sizeStr.trim().match(/(\d+\.?\d*)\s*[*xX×]\s*(\d+\.?\d*)/);
+  return m ? Math.round(parseFloat(m[1]) * parseFloat(m[2])) : 0;
+}
+
+// ─── Colony → Plot datalist populate ──────────────────────────
+function onColonyChange() {
+  const colony = document.getElementById('colony').value;
+  const plotInput = document.getElementById('plotNumber');
+  const dl = document.getElementById('plotDatalist');
+  const badge = document.getElementById('autoFillBadge');
+
+  // Clear previous
+  dl.innerHTML = '';
+  plotInput.value = '';
+  document.getElementById('plotSize').value = '';
+  document.getElementById('sizeHint').textContent = '';
+
+  if (colonyData[colony]) {
+    colonyData[colony].forEach(p => {
+      const sqft = parseSqft(p.size);
+      const opt = document.createElement('option');
+      opt.value = p.no;
+      const sizeLabel = p.size && !p.size.includes('?') ? `${p.size} = ${sqft} sqft` : (p.size || '');
+      opt.label = sizeLabel ? `(${sizeLabel})` : '';
+      dl.appendChild(opt);
+    });
+    badge.style.display = 'inline-block';
+    plotInput.placeholder = 'List से चुनें या खुद टाइप करें';
+  } else {
+    badge.style.display = 'none';
+    plotInput.placeholder = 'प्लॉट नंबर टाइप करें';
+  }
+}
+
+// ─── Plot input → auto-fill on exact match ────────────────────
+function onPlotChange() {
+  const colony = document.getElementById('colony').value;
+  const typed = document.getElementById('plotNumber').value.trim();
+  if (!typed || !colonyData[colony]) {
+    document.getElementById('sizeHint').textContent = '';
+    return;
+  }
+
+  // Find exact match (case-insensitive)
+  const match = colonyData[colony].find(p => p.no.toLowerCase() === typed.toLowerCase());
+  if (!match) {
+    // No match — user may be typing custom; clear size hint but keep size field editable
+    document.getElementById('sizeHint').textContent = typed ? '✏️ कस्टम प्लॉट नंबर — साइज़ खुद भरें' : '';
+    return;
+  }
+
+  const sizeStr = match.size || '';
+  const sqft = parseSqft(sizeStr);
+
+  // Size auto-fill
+  if (sqft > 0) {
+    document.getElementById('plotSize').value = sqft;
+    let hint = `📐 साइज़: ${sizeStr} = ${sqft} sqft (ऑटो-भरा)`;
+    if (match.remark) hint += ` — ⚠️ ${match.remark}`;
+    document.getElementById('sizeHint').textContent = hint;
+  } else if (sizeStr.includes('?')) {
+    document.getElementById('plotSize').value = '';
+    document.getElementById('sizeHint').textContent = `⚠️ ${match.remark || 'Depth tapering'} — ${sizeStr.replace('*?','')} ft चौड़ाई। साइज़ खुद भरें।`;
+  }
+
+  // Category auto-fill
+  if (match.cat) {
+    document.getElementById('plotCategory').value = match.cat;
+  }
+
+  calculateAmounts();
+}
+
+// ─── Calculations ──────────────────────────────────────────────
+function calculateAmounts() {
+  const size = parseFloat(document.getElementById('plotSize').value) || 0;
+  const negRate = parseFloat(document.getElementById('negotiatedRate').value) || 0;
+  const advance = parseFloat(document.getElementById('advanceAmount').value) || 0;
+  const totalAmount = parseFloat(document.getElementById('baseTotal').value) || 0;
+
+  if (size && negRate && !document.getElementById('totalDealAmount').dataset.manual) {
+    document.getElementById('totalDealAmount').value = size * negRate;
+  }
+
+  const dealAmount = parseFloat(document.getElementById('totalDealAmount').value) || 0;
+  const refAmount = totalAmount || (size * negRate);
+  const discount = refAmount - dealAmount;
+
+  if (discount > 0 && refAmount > 0 && dealAmount > 0) {
+    const pct = ((discount / refAmount) * 100).toFixed(1);
+    document.getElementById('discountBox').style.display = 'block';
+    document.getElementById('discountReasonField').style.display = 'block';
+    document.getElementById('discountAmount').textContent = `₹ ${discount.toLocaleString('en-IN')} (${pct}%)`;
+  } else {
+    document.getElementById('discountBox').style.display = 'none';
+    document.getElementById('discountReasonField').style.display = 'none';
+  }
+
+  document.getElementById('summaryTotal').textContent = `₹ ${dealAmount.toLocaleString('en-IN')}`;
+  document.getElementById('summaryAdvance').textContent = `₹ ${advance.toLocaleString('en-IN')}`;
+  document.getElementById('summaryBalance').textContent = `₹ ${(dealAmount - advance).toLocaleString('en-IN')}`;
+
+  if (document.getElementById('inst_amount_1')) {
+    document.getElementById('inst_amount_1').value = advance;
+    calculateInstallmentsTotal();
+  }
+}
+
+// ─── Installments ──────────────────────────────────────────────
+window.installmentCount = 0;
+addAdvanceRow();
+
+function addAdvanceRow() {
+  const tbody = document.getElementById('installmentRows');
+  const today = new Date().toISOString().split('T')[0];
+  tbody.innerHTML = `
+    <tr>
+      <td><strong>1</strong></td>
+      <td><input type="date" id="inst_date_1" value="${today}" readonly style="background:#f1f5f9;"></td>
+      <td><input type="number" id="inst_amount_1" placeholder="एडवांस" readonly style="background:#f1f5f9;" oninput="calculateInstallmentsTotal()"></td>
+      <td><span style="background:#d1fae5;color:#065f46;padding:3px 8px;border-radius:4px;font-size:11px;">आज का एडवांस</span></td>
+      <td></td>
+    </tr>`;
+  window.installmentCount = 1;
+}
+
+function addInstallment() {
+  window.installmentCount++;
+  const tbody = document.getElementById('installmentRows');
+  const row = document.createElement('tr');
+  row.id = `inst_row_${window.installmentCount}`;
+  row.innerHTML = `
+    <td><strong>${window.installmentCount}</strong></td>
+    <td><input type="date" id="inst_date_${window.installmentCount}" onchange="calculateInstallmentsTotal()"></td>
+    <td><input type="number" id="inst_amount_${window.installmentCount}" placeholder="राशि" oninput="calculateInstallmentsTotal()"></td>
+    <td><input type="text" placeholder="जैसे: रजिस्ट्री पर"></td>
+    <td><button type="button" class="delete-btn" onclick="document.getElementById('inst_row_${window.installmentCount}').remove(); calculateInstallmentsTotal();">×</button></td>`;
+  tbody.appendChild(row);
+}
+
+function calculateInstallmentsTotal() {
+  let total = 0;
+  for (let i = 1; i <= window.installmentCount; i++) {
+    const inp = document.getElementById(`inst_amount_${i}`);
+    if (inp) total += parseFloat(inp.value) || 0;
+  }
+  document.getElementById('installmentsTotal').textContent = `₹ ${total.toLocaleString('en-IN')}`;
+  const deal = parseFloat(document.getElementById('totalDealAmount').value) || 0;
+  const mc = document.getElementById('installmentsMatch');
+  if (deal > 0) {
+    if (Math.abs(total - deal) < 1) mc.innerHTML = '<span style="color:#065f46;font-size:11px;">✓ डील से मिलान</span>';
+    else mc.innerHTML = `<span style="color:#dc2626;font-size:11px;">अंतर: ₹${Math.abs(deal-total).toLocaleString('en-IN')}</span>`;
+  }
+}
+
+// ─── Cash limit check ──────────────────────────────────────────
+function checkCashLimit() {
+  const mode = document.getElementById('paymentMode').value;
+  const cashField = document.getElementById('cashAmountField');
+  const chequeField = document.getElementById('chequeDetailsField');
+  const warning = document.getElementById('cashWarning');
+  const advance = parseFloat(document.getElementById('advanceAmount').value) || 0;
+  if (mode === 'cash') {
+    cashField.style.display = 'block'; chequeField.style.display = 'none';
+    document.getElementById('cashComponent').value = advance;
+    if (advance > 11000) { warning.className = 'validation-msg error'; warning.textContent = `⚠️ Income Tax Alert: ₹${advance.toLocaleString('en-IN')} कैश लिमिट (₹11,000) से ज़्यादा है!`; }
+    else if (advance > 0) { warning.className = 'validation-msg'; warning.style.display='block'; warning.style.color='#065f46'; warning.textContent = '✓ कैश लिमिट के अंदर है'; }
+  } else if (mode === 'mixed') { cashField.style.display='block'; chequeField.style.display='block'; }
+  else if (['cheque','upi','bank_transfer'].includes(mode)) { cashField.style.display='none'; chequeField.style.display='block'; }
+  else { cashField.style.display='none'; chequeField.style.display='none'; }
+}
+
+// ─── Family Details ────────────────────────────────────────────
+let familyRowCount = 0;
+function addFamilyRow() {
+  familyRowCount++;
+  const tbody = document.getElementById('familyRows');
+  const row = document.createElement('tr');
+  row.id = `fam_row_${familyRowCount}`;
+  const rels = ['पत्नी','पति','बेटा','बेटी','पिता','माता','भाई','बहन','अन्य'];
+  const relOpts = rels.map(r => `<option value="${r}">${r}</option>`).join('');
+  row.innerHTML = `
+    <td><strong>${familyRowCount}</strong></td>
+    <td><select style="padding:5px 6px;font-size:12px;width:100%;border:1.5px solid #cbd5e1;border-radius:6px;"><option value="">रिश्ता...</option>${relOpts}</select></td>
+    <td><input type="text" placeholder="नाम" style="padding:5px 6px;font-size:13px;"></td>
+    <td><input type="number" placeholder="उम्र" min="0" max="100" style="padding:5px 6px;font-size:13px;width:60px;"></td>
+    <td><input type="date" style="padding:5px 6px;font-size:12px;"></td>
+    <td><input type="text" placeholder="जैसे: किसान" style="padding:5px 6px;font-size:13px;"></td>
+    <td><input type="text" placeholder="जैसे: डॉक्टर" style="padding:5px 6px;font-size:13px;"></td>
+    <td><input type="text" placeholder="नोट" style="padding:5px 6px;font-size:13px;"></td>
+    <td><button type="button" class="delete-btn" onclick="document.getElementById('fam_row_${familyRowCount}').remove()">×</button></td>`;
+  tbody.appendChild(row);
+}
+
+// ─── File upload ───────────────────────────────────────────────
+function handleFileUpload(input, displayId) {
+  if (input.files && input.files[0]) {
+    document.getElementById(displayId).style.display = 'block';
+    document.getElementById(displayId).textContent = `✓ ${input.files[0].name}`;
+  }
+}
+
+// ─── Manual total override ─────────────────────────────────────
+document.getElementById('totalDealAmount').addEventListener('change', function() { this.dataset.manual = 'true'; });
+
+// ─── Validation ────────────────────────────────────────────────
+function validateForm() {
+  const deal = parseFloat(document.getElementById('totalDealAmount').value) || 0;
+  let instTotal = 0;
+  for (let i = 1; i <= window.installmentCount; i++) {
+    const inp = document.getElementById(`inst_amount_${i}`);
+    if (inp) instTotal += parseFloat(inp.value) || 0;
+  }
+  if (Math.abs(instTotal - deal) > 1) {
+    alert(`⚠️ किस्तों का कुल (₹${instTotal.toLocaleString('en-IN')}) डील राशि (₹${deal.toLocaleString('en-IN')}) से मेल नहीं खा रहा!\nअंतर: ₹${Math.abs(deal-instTotal).toLocaleString('en-IN')}\nकृपया सुधारें।`);
+    return false;
+  }
+  for (let i = 1; i <= window.installmentCount; i++) {
+    const d = document.getElementById(`inst_date_${i}`);
+    if (d && !d.value) { alert(`⚠️ किस्त #${i} की तारीख नहीं भरी है।`); return false; }
+  }
+  const mode = document.getElementById('paymentMode').value;
+  const adv = parseFloat(document.getElementById('advanceAmount').value) || 0;
+  if (mode === 'cash' && adv > 11000) {
+    if (!confirm(`⚠️ नकद ₹${adv.toLocaleString('en-IN')} — Income Tax लिमिट से ज़्यादा!\nक्या फिर भी जमा करें?`)) return false;
+  }
+  return true;
+}
+
+// ─── Submit ────────────────────────────────────────────────────
+function submitForm(event) {
+  event.preventDefault();
+  if (!validateForm()) return false;
+  const plotEl = document.getElementById('plotNumber');
+  const formData = {
+    bookingId: document.getElementById('bookingIdDisplay').textContent.replace('Booking ID: ',''),
+    customerName: document.getElementById('customerName').value,
+    phone: document.getElementById('phonePrimary').value,
+    colony: document.getElementById('colony').value,
+    plotNumber: plotEl ? plotEl.value : '',
+    totalDeal: document.getElementById('totalDealAmount').value,
+    advance: document.getElementById('advanceAmount').value,
+    timestamp: new Date().toISOString()
+  };
+  const subs = JSON.parse(localStorage.getItem('booking_submissions') || '[]');
+  subs.push(formData);
+  localStorage.setItem('booking_submissions', JSON.stringify(subs));
+  document.querySelector('#successMessage strong').textContent = formData.bookingId;
+  document.getElementById('successModal').classList.add('active');
+  return false;
+}
+
+// ─── Draft save/load ───────────────────────────────────────────
+function saveDraft() {
+  const draft = {};
+  document.querySelectorAll('input,select,textarea').forEach(el => {
+    if (el.id) draft[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+  localStorage.setItem('booking_draft', JSON.stringify(draft));
+  alert('✓ ड्राफ्ट सेव हो गया!');
+}
+
+function loadDraft() {
+  const d = localStorage.getItem('booking_draft');
+  if (!d) return;
+  const data = JSON.parse(d);
+  Object.keys(data).forEach(k => {
+    const el = document.getElementById(k);
+    if (el) { if (el.type === 'checkbox') el.checked = data[k]; else if (data[k]) el.value = data[k]; }
+  });
+  calculateAmounts();
+}
+
+function resetForm() {
+  document.getElementById('successModal').classList.remove('active');
+  document.getElementById('bookingForm').reset();
+  localStorage.removeItem('booking_draft');
+  const yr = new Date().getFullYear();
+  const rnd = Math.floor(1000 + Math.random() * 9000);
+  document.getElementById('bookingIdDisplay').textContent = `Booking ID: BK-${yr}-${rnd}`;
+  document.getElementById('bookingDate').value = new Date().toISOString().split('T')[0];
+  addAdvanceRow();
+  ['summaryTotal','summaryAdvance','summaryBalance'].forEach(id => document.getElementById(id).textContent = '₹ 0');
+  window.scrollTo(0,0);
+}
+
+// ─── Init ──────────────────────────────────────────────────────
+const yr = new Date().getFullYear();
+const rnd = Math.floor(1000 + Math.random() * 9000);
+document.getElementById('bookingIdDisplay').textContent = `Booking ID: BK-${yr}-${rnd}`;
+document.getElementById('bookingDate').value = new Date().toISOString().split('T')[0];
+window.addEventListener('load', loadDraft);
+</script>
+</body>
+</html>
