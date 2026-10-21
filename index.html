@@ -526,25 +526,24 @@ const colonyData = {
     {no:"14",size:"25*50"},{no:"15",size:"25*50"},{no:"17",size:"30*33"},{no:"18",size:"29*33"}
   ],
   vinayak_residency: [
-    // Left Strip (40ft Road)
-    {no:"1",  size:"23*40",   cat:"40ft_road"},
-    {no:"2",  size:"25*40",   cat:"corner"},
-    {no:"3",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
-    {no:"4",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
-    {no:"5",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
-    {no:"6",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
-    {no:"7",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
-    {no:"8",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
-    {no:"9",  size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
-    {no:"10", size:"20*47.5", cat:"40ft_road", remark:"Depth approx 47-48ft"},
-    {no:"11", size:"20*48",   cat:"40ft_road"},
-    {no:"12", size:"20*48",   cat:"40ft_road"},
-    {no:"13", size:"20*48",   cat:"40ft_road"},
-    {no:"14", size:"20*48",   cat:"40ft_road"},
-    {no:"15", size:"20*48",   cat:"40ft_road"},
-    {no:"15 (dup)", size:"20*48", cat:"40ft_road", remark:"Map par 15 do baar"},
-    {no:"16", size:"12*48",   cat:"corner", remark:"Corner confirm nahi"},
-    // Block 2
+    // === LEFT STRIP (ROAD 40' WIDE) — real map se exact dimensions ===
+    {no:"1",  size:"23*40",   cat:"corner"},        // SW corner plot
+    {no:"2",  size:"25*40",   cat:"40ft_road"},
+    {no:"3",  size:"20*47.4", cat:"40ft_road"},     // map: 47'-5"
+    {no:"4",  size:"20*47.2", cat:"40ft_road"},     // map: 47'-2"
+    {no:"5",  size:"20*47.1", cat:"40ft_road"},     // map: 47'-1"
+    {no:"6",  size:"20*47.3", cat:"40ft_road"},     // map: 47'-3"
+    {no:"7",  size:"20*47.4", cat:"40ft_road"},     // map: 47'-5"
+    {no:"8",  size:"20*47.6", cat:"40ft_road"},     // map: 47'-7"
+    {no:"9",  size:"20*47.7", cat:"40ft_road"},     // map: 47'-8"
+    {no:"10", size:"20*47.8", cat:"40ft_road"},     // map: 47'-10"
+    {no:"11", size:"20*47.9", cat:"40ft_road"},     // map: 47'-11"
+    {no:"12", size:"20*47.9", cat:"40ft_road"},     // map: 47'-11"
+    {no:"13", size:"20*48.1", cat:"40ft_road"},     // map: 48'-1"
+    {no:"14", size:"20*48.2", cat:"40ft_road"},     // map: 48'-2"
+    {no:"15", size:"20*48.2", cat:"40ft_road"},     // map: 48'-2"
+    {no:"16", size:"12*49.2", cat:"corner"},        // NW corner — map: 49'-2"
+    // === Block 2 (upper row, 30' road ke upar wali) ===
     {no:"49", size:"30*40",   cat:"corner"},
     {no:"50", size:"25*40",   cat:"40ft_road"},
     {no:"51", size:"25*40",   cat:"corner"},
@@ -555,34 +554,36 @@ const colonyData = {
     {no:"56", size:"20*40",   cat:"30ft_road"},
     {no:"57", size:"20*40",   cat:"30ft_road"},
     {no:"58", size:"20*40",   cat:"30ft_road"},
-    {no:"59", size:"16.3*40", cat:"30ft_road", remark:"Tirchi boundary"},
-    {no:"42", size:"19.4*40", cat:"30ft_road", remark:"Tirchi boundary"},
-    {no:"43", size:"20*40",   cat:"30ft_road"},
+    {no:"59", size:"16.3*40", cat:"30ft_road",  remark:"Tirchi boundary - 16'-4\""},
+    // === Block 2 (lower row) ===
+    {no:"42", size:"19.4*40", cat:"30ft_road",  remark:"Tirchi left corner"},
+    {no:"43", size:"25*40",   cat:"30ft_road"},
     {no:"44", size:"25*40",   cat:"30ft_road"},
     {no:"45", size:"25*40",   cat:"30ft_road"},
     {no:"46", size:"25*40",   cat:"30ft_road"},
     {no:"47", size:"25*40",   cat:"30ft_road"},
     {no:"48", size:"25*40",   cat:"30ft_road"},
-    // Block 3
+    // === Block 3 (upper row) ===
     {no:"31", size:"30*40",   cat:"corner"},
     {no:"32", size:"25*40",   cat:"40ft_road"},
     {no:"33", size:"25*40",   cat:"corner"},
-    {no:"34", size:"25*40",   cat:"30ft_road"},
+    {no:"34", size:"20*40",   cat:"30ft_road"},    // map: 20' width (not 25')
     {no:"35", size:"20*40",   cat:"30ft_road"},
     {no:"36", size:"20*40",   cat:"30ft_road"},
     {no:"37", size:"20*40",   cat:"30ft_road"},
     {no:"38", size:"20*40",   cat:"30ft_road"},
     {no:"39", size:"20*40",   cat:"30ft_road"},
     {no:"40", size:"20*40",   cat:"30ft_road"},
-    {no:"41", size:"22.5*40", cat:"30ft_road", remark:"Tirchi boundary"},
-    {no:"B3-L1", size:"25*40",   cat:"30ft_road", remark:"Lower row (map no. unclear)"},
-    {no:"B3-L2", size:"25*40",   cat:"30ft_road"},
-    {no:"B3-L3", size:"25*40",   cat:"30ft_road"},
-    {no:"B3-L4", size:"25*40",   cat:"30ft_road"},
-    {no:"B3-L5", size:"25*40",   cat:"30ft_road"},
-    {no:"B3-L6", size:"25*40",   cat:"30ft_road"},
-    {no:"B3-L7", size:"25.6*40", cat:"30ft_road", remark:"Tirchi boundary"},
-    // Block 4
+    {no:"41", size:"22.5*40", cat:"30ft_road",  remark:"Tirchi right corner — 22'-6\""},
+    // === Block 3 (lower row — actual no. map se confirm karein) ===
+    {no:"26", size:"25*40",   cat:"30ft_road",  remark:"Lower row — no. map se confirm"},
+    {no:"27", size:"25*40",   cat:"30ft_road",  remark:"Lower row — no. map se confirm"},
+    {no:"28", size:"25*40",   cat:"30ft_road",  remark:"Lower row — no. map se confirm"},
+    {no:"29", size:"25*40",   cat:"30ft_road",  remark:"Lower row — no. map se confirm"},
+    {no:"30", size:"25*40",   cat:"30ft_road",  remark:"Lower row — no. map se confirm"},
+    {no:"30A",size:"25*40",   cat:"30ft_road",  remark:"Lower row — no. map se confirm"},
+    {no:"30B",size:"25.6*40", cat:"30ft_road",  remark:"Tirchi right corner — lower row"},
+    // === Block 4 (bottom, single row) ===
     {no:"17", size:"25*40",   cat:"corner"},
     {no:"18", size:"25*40",   cat:"30ft_road"},
     {no:"19", size:"25*40",   cat:"30ft_road"},
@@ -591,15 +592,15 @@ const colonyData = {
     {no:"22", size:"25*40",   cat:"30ft_road"},
     {no:"23", size:"25*40",   cat:"30ft_road"},
     {no:"24", size:"25*40",   cat:"30ft_road"},
-    {no:"25", size:"20.6*40", cat:"30ft_road", remark:"Tirchi boundary"},
-    // Top Wedge (depth tapering - confirm karo)
-    {no:"60", size:"25.1*?",  cat:"30ft_road", remark:"Depth tapering - map se confirm"},
-    {no:"61", size:"25*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
-    {no:"62", size:"25*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
-    {no:"63", size:"25*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
-    {no:"64", size:"25*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
-    {no:"65", size:"30*?",    cat:"30ft_road", remark:"Depth tapering - map se confirm"},
-    {no:"66", size:"38.25*?", cat:"corner",    remark:"Depth tapering - map se confirm"}
+    {no:"25", size:"10*40",   cat:"30ft_road",  remark:"Tirchi right corner — 10ft to 22.6ft"},
+    // === Top Wedge (tapering depth — map se exact depth confirm karein) ===
+    {no:"60", size:"25.1*?",  cat:"30ft_road",  remark:"Depth tapering — map se confirm"},
+    {no:"61", size:"25*?",    cat:"30ft_road",  remark:"Depth tapering — map se confirm"},
+    {no:"62", size:"25*?",    cat:"30ft_road",  remark:"Depth tapering — map se confirm"},
+    {no:"63", size:"25*?",    cat:"30ft_road",  remark:"Depth tapering — map se confirm"},
+    {no:"64", size:"25*?",    cat:"30ft_road",  remark:"Depth tapering — map se confirm"},
+    {no:"65", size:"34.2*?",  cat:"30ft_road",  remark:"Depth tapering — map: 34'-2\""},
+    {no:"66", size:"38.25*?", cat:"corner",     remark:"Depth tapering — map: 38'-3\""}
   ]
 };
 
